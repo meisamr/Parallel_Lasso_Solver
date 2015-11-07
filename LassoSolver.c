@@ -120,18 +120,18 @@ int main(int argc, char **argv)
     b =(double*)calloc(m, sizeof(double));
     fp = fopen("./Data/b.bin", "rb");
     if (!fp)
-		{
-			printf("Unable to open file!");
-			return 1;
-		}
-	if (fp)
-		{
-            for (i=0;i<m;i++)
-            {
-                fread((void*)(&v), sizeof(v), 1, fp);
+    {
+    	printf("Unable to open file!");
+    	return 1;
+    }
+    if (fp)
+    {
+    	for (i=0;i<m;i++)
+    	{
+    		fread((void*)(&v), sizeof(v), 1, fp);
                 b[i] = v;
-            }
-		}
+    	}
+    }
     fclose(fp);
 
 /* You can uncomment this part for printing b */    
@@ -152,24 +152,24 @@ int main(int argc, char **argv)
     xs = (double*) calloc(n,sizeof(double));
     fp = fopen("./Data/x.bin", "rb");
     if (!fp)
-		{
-			printf("Unable to open file!");
-			return 1;
-		}
-	if (fp)
-		{
-            for (j=0; j < (my_rank * blcklngth);j++)
-		    {
-		        fread((void*)(&v), sizeof(v), 1, fp);
-		    }
-		    norm2xs = 0.0;
-            for (j=0;j<n;j++)
-            {
-                fread((void*)(&v), sizeof(v), 1, fp);
+    {
+    	printf("Unable to open file!");
+	return 1;
+    }
+    if (fp)
+    {
+    	for (j=0; j < (my_rank * blcklngth);j++)
+    	{
+    		fread((void*)(&v), sizeof(v), 1, fp);
+    	}
+    	norm2xs = 0.0;
+        for (j=0;j<n;j++)
+        {
+        	fread((void*)(&v), sizeof(v), 1, fp);
                 xs[j] = v;
                 norm2xs += v * v;
-            }
-		}
+        }
+    }
     fclose(fp);
     MPI_Allreduce(&norm2xs,&norm2xs,1,MPI_DOUBLE,MPI_SUM,MPI_COMM_WORLD);
 
