@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     double stepsize,startTime,endTime,ElapsedTime, frobA2, tau, norm2xs;
     MPI_Status status; // for MPI receive function
     int iter = 0;
-    const int MAX_ITER  = 2500000;
+    const int MAX_ITER  = 1000000;
     srand (time(NULL));
     objective = 0.0;
     fp = fopen("./Data/dimensions.txt", "r");
