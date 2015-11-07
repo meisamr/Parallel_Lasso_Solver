@@ -68,26 +68,26 @@ int main(int argc, char **argv)
     A = (double*) calloc(m*n,sizeof(double));
     fp = fopen("./Data/A.bin", "rb");
     if (!fp)
+    {
+    	printf("Unable to open file!");
+    	return 1;
+    }
+    if (fp)
+    {
+    	for (j=0; j < (my_rank * m * blcklngth);j++)
+    	{
+    		fread((void*)(&v), sizeof(v), 1, fp);
+	}
+	for (j=0;j<n;j++)
+	{
+		for (i=0;i<m;i++)
 		{
-			printf("Unable to open file!");
-			return 1;
-		}
-	if (fp)
-		{
-		    for (j=0; j < (my_rank * m * blcklngth);j++)
-		    {
-		        fread((void*)(&v), sizeof(v), 1, fp);
-		    }
-
-		    for (j=0;j<n;j++)
-		    {
-		        for (i=0;i<m;i++)
-		        {
-                    fread((void*)(&v), sizeof(v), 1, fp);
-                    A[i+ m*j] = v;
-		        }
-		    }
-		}
+			fread((void*)(&v), sizeof(v), 1, fp);
+			A[i+ m*j] = v;
+	        }
+		
+	}
+    }
     fclose(fp);
 
 /* You can uncomment this part for printing the matrix A; please don't do it for large matrices though :) */
