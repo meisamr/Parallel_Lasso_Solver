@@ -3,17 +3,17 @@
 #include <mpi.h>
 #include <math.h>
 
-// Note: This is the code for using random parallel successive convex approximation (RPSCA) for solving Lasso problem
-// The paper can be found here:
-/* http://arxiv.org/abs/1406.3665  */
+/* Note: This is the code for using random parallel successive convex approximation (RPSCA) for solving Lasso problem
+The paper can be found here:
+http://arxiv.org/abs/1406.3665  */
 
 
-// Solve lasso problem min 0.5*|b-Ax|_F^2 + lambda * |x|_1  
-// Optimization variable is x
-// x dimension n x 1
-// b dimension m x 1
-// A dimension m x n
-// (c) Meisam Razaviyayn 
+/* Solve lasso problem min 0.5*|b-Ax|_F^2 + lambda * |x|_1  
+  Optimization variable is x
+  x dimension n x 1
+  b dimension m x 1
+  A dimension m x n
+ (c) Meisam Razaviyayn */
 
 double distance(int n, double *x, double *xs);
 // distance of two vectors
@@ -115,7 +115,7 @@ int main(int argc, char **argv)
  //   tau = frobA2/(20 * n_total);
 
 
-    /* Reading the vector b */
+    // Reading the vector b 
     double *b;
     b =(double*)calloc(m, sizeof(double));
     fp = fopen("./Data/b.bin", "rb");
